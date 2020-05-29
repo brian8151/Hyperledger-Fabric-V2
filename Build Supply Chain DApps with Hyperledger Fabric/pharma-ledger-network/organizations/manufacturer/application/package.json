@@ -1,0 +1,23 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "O'Reilly - Accelerated Hands-on Smart Contract Development with Hyperledger Fabric V2",
+  "main": "app.js",
+  "scripts": {
+    "test": "rm -rf _idwallet && node addToWallet.js"
+  },
+  "keywords": [],
+  "author": "Brian Wu",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "fabric-network": "^2.1.0",
+    "fabric-ca-client": "^2.1.0",
+    "js-yaml": "^3.12.0",
+    "memory-cache": "^0.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.0"
+  }
+}

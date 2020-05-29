@@ -1,0 +1,185 @@
+
+<!--O'Reilly - Accelerated Hands-on Smart Contract Development with Hyperledger Fabric V2
+ # farma ledger supply chain network
+ # Author: Brian Wu
+ # load application page - Pharmacy
+-->
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>O'Reilly - Accelerated Hands-on Smart Contract Development with Hyperledger Fabric V2</title>
+    <!--Import Google Icon Font-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link type="text/css" href="/css/style.css" rel="stylesheet">
+    <script src="/js/plnClient.js"></script>
+  </head>
+<body>
+  <nav class="navbar navbar-light navbar-light" style="background-color: #343a40;margin-top: -3px;">
+    <span class="navbar-brand text-white">Pharmacy (Org3)</span>
+  </nav>
+  <nav class="navbar navbar-default" role="navigation">
+	<div class="container">
+		<div id="sidebar-wrapper" class="sidebar-toggle">
+		    <ul class="sidebar-nav">
+		    	<li id="addToWalletLink" class="nav-menu">
+		      	   <a id="menu1" href="#addToWallet"><i class="fa fa-user menuIcon"></i>AddToWallet</a>
+		    	</li>
+		    	<li id="pharmacyReceivedLink" class="nav-menu">
+		           <a id="menu2" href="#pharmacyReceived"><i class="fa fa-university menuIcon"></i>PharmacyReceived</a>
+		    	</li>
+		    	<li id="queryLink" class="nav-menu">
+		           <a id="menu3" href="#query"><i class="fa fa-search menuIcon"></i>Query</a>
+		    	</li>
+          <li id="queryHistoryLink" class="nav-menu">
+               <a id="menu3" href="#queryHistory"><i class="fa fa-history menuIcon"></i>Query History</a>
+          </li>
+		   </ul>
+		</div>
+  	</div>
+</nav>
+<!-- tab content -->
+<div class="tab-content page-content">
+    <!-- addToWallet --->
+    <div class="tab-pane active text-style" id="addToWalletTab">
+      <div class="alert alert-primary" role="alert">
+         <h4>Add User To Wallet</h4>
+      </div>
+		<form>
+		  <div class="form-group">
+		    <input type="text" class="form-control" id="user" placeholder="Enter User">
+		  </div>
+		  <button id="addUser" type="submit" class="btn btn-success">Add User</button>
+		</form>
+    <hr>
+    </div>
+    <!-- makeEquipment --->
+    <div class="tab-pane text-style" id="pharmacyReceivedTab">
+      <div class="alert alert-primary" role="alert">
+         <h4>Pharmacy Received</h4>
+      </div>
+      	<form>
+      	  <div class="form-group row">
+      	    <label for="equipmentNumber" class="col-sm-2 col-form-label">Equipment Number</label>
+      	    <div class="col-sm-10">
+      	      <input type="text" class="form-control" id="equipmentNumber" value="2020.0101">
+      	    </div>
+      	  </div>
+      	  <div class="form-group row">
+      	    <label for="ownerName" class="col-sm-2 col-form-label">Owner Name</label>
+      	    <div class="col-sm-10">
+      	      <input type="text" class="form-control" id="ownerName" value="GlobalPharmacyInc">
+      	    </div>
+      	  </div>
+      	  <button type="submit" id="pharmacyReceived" class="btn btn-success mb-2">Submit</button>
+      	</form>
+       <hr>
+    </div>
+    <!-- query --->
+  <div class="tab-pane text-style" id="queryTab">
+    <div class="alert alert-primary" role="alert">
+       <h4>Query supply chain data</h4>
+    </div>
+       <form>
+    	   <div class="form-group">
+    		<input type="text" class="form-control" id="queryKey" placeholder="Enter Key">
+    	   </div>
+    	   <button id="query" type="submit" class="btn btn-success">Query</button>
+	    </form>
+       <hr>
+       <div id="queryResult">
+           <h4 class="display-4 text-center">Query Result</h4>
+           <table class="table table-striped table-sm">
+              <tbody>
+                <tr>
+                  <th scope="row">QueryKey</th>
+                  <td><span id="queryKeyRequest"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Manufacturer</th>
+                  <td><span id="manufacturerOutPut"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Equipment Number</th>
+                  <td><span id="equipmentNumberOutPut"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Equipment Name</th>
+                  <td><span id="equipmentNameOutPut"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Owner</th>
+                  <td><span id="ownerNameOutPut"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Previous Owner Type</th>
+                  <td><span id="previousOwnerType"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Current Owner Type</th>
+                  <td><span id="currentOwnerType"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Eqipment Created Date</th>
+                  <td><span id="createDateTime"></span></td>
+                </tr>
+                <tr>
+                  <th scope="row">Last Updated Date/th>
+                  <td><span id="lastUpdated"></span></td>
+                </tr>
+              </tbody>
+            </table>
+       </div>
+       <div id="queryResultEmpty">
+           <h3 class="display-4 text-center">Not record found</h3>
+       </div>
+    </div>
+    <!-- query history --->
+  <div class="tab-pane text-style" id="queryHistoryTab">
+        <div class="alert alert-primary" role="alert">
+           <h4>Query supply chain history data</h4>
+        </div>
+       <form>
+         <div class="form-group">
+        <input type="text" class="form-control" id="queryHistoryKey" placeholder="Enter Key">
+         </div>
+         <button id="queryHistory" type="submit" class="btn btn-success">Query History</button>
+      </form>
+       <hr>
+       <div id="queryHistoryResult">
+           <h4 class="display-5 text-center">Query History Result</h4>
+           <table id="historyTable" class="table table-striped table-sm">
+             <thead>
+               <tr>
+                 <th scope="col">QueryKey</th>
+                 <th scope="col">Manufacturer</th>
+                 <th scope="col">Equipment Number</th>
+                 <th scope="col">Equipment Name</th>
+                 <th scope="col">Owner</th>
+                 <th scope="col">Previous Owner Type</th>
+                 <th scope="col">Current Owner Type</th>
+                 <th scope="col">Eqipment Created Date</th>
+                 <th scope="col">Last Updated Date</th>
+               </tr>
+             </thead>
+             <tbody id="historyTableTboday">
+
+             </tbody>
+
+           </table>
+       </div>
+       <div id="queryHistoryResultEmpty">
+           <h3 class="display-4 text-center">Not record found</h3>
+       </div>
+    </div>
+</div>
+<div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='/images/wait.gif' width="64" height="64" /><br>Loading..</div>
+</body>
+</html>

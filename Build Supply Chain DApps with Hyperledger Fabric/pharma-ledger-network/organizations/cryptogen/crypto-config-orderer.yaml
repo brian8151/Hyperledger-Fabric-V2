@@ -1,0 +1,23 @@
+# O'Reilly - Accelerated Hands-on Smart Contract Development with Hyperledger Fabric V2
+# farma ledger supply chain network
+# Author: Brian Wu
+#
+# ---------------------------------------------------------------------------
+# "OrdererOrgs" -define ordering node and Create an organization definition
+# ---------------------------------------------------------------------------
+OrdererOrgs:
+  # ---------------------------------------------------------------------------
+  # Orderer
+  # ---------------------------------------------------------------------------
+  - Name: Orderer
+    Domain: example.com
+    EnableNodeOUs: true
+    # ---------------------------------------------------------------------------
+    # "Specs" - See PeerOrgs for complete description
+    # SANS: (Optional) Specifies one or more Subject Alternative Names
+    # to be set in the resulting x509.
+    # ---------------------------------------------------------------------------
+    Specs:
+      - Hostname: orderer
+        SANS:
+          - localhost
