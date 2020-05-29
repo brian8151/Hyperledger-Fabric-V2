@@ -50,14 +50,14 @@ invokeMakeEquipment() {
   endCallFuncLogWithMsg "invokeMakeEquipment" "Invoke transaction successful"
   echo
 }
-invokeWolesalerDistribute() {
+invokeWholesalerDistribute() {
   parsePeerConnectionParameters $@
   echo "invokeWolesalerDistribute--> equipmentNumber: $equipmentNumber, - ownerName: $ownerName"
   res=$?
   verifyResult $res "Invoke transaction failed on channel '$CHANNEL_NAME' due to uneven number of peer and org parameters "
   starCallFuncWithStepLog "invokeShipToWholesaler" 3
   set -x
-  peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CHINCODE_NAME} $PEER_CONN_PARMS  -c '{"function":"wolesalerDistribute","Args":[ "'$equipmentNumber'", "'$ownerName'"]}' >&log.txt
+  peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CHINCODE_NAME} $PEER_CONN_PARMS  -c '{"function":"wholesalerDistribute","Args":[ "'$equipmentNumber'", "'$ownerName'"]}' >&log.txt
   res=$?
   set +x
   cat log.txt
@@ -194,25 +194,25 @@ elif [ "${MODE}" == "equipment" ]; then
   if [[ $# -ne 4 ]] ; then
     printHelp
     exit 0
-  fi 
+  fi
   manufacturer=$1
   equipmentNumber=$2
   equipmentName=$3
   ownerName=$4
   invokeMakeEquipment 1 2 3
-elif [ "${MODE}" == "wolesaler" ]; then
+elif [ "${MODE}" == "wholesaler" ]; then
   if [[ $# -ne 2 ]] ; then
     printHelp
     exit 0
-  fi     
+  fi
   equipmentNumber=$1
   ownerName=$2
-  invokeWolesalerDistribute 1 2 3
+  invokeWholesalerDistribute 1 2 3
 elif [ "${MODE}" == "pharmacy" ]; then
    if [[ $# -ne 2 ]] ; then
     printHelp
     exit 0
-  fi     
+  fi
   equipmentNumber=$1
   ownerName=$2
   invokePharmacyReceived 1 2 3
