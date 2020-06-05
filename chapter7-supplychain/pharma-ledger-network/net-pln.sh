@@ -177,54 +177,6 @@ function createOrgs() {
 
   fi
 
-  # Create crypto material using Fabric CAs
-  if [ "$CRYPTO" == "Certificate Authorities" ]; then
-
-    fabric-ca-client version > /dev/null 2>&1
-    if [ $? -ne 0 ]; then
-      echo "Fabric CA client not found locally, downloading..."
-      cd ..
-      curl -s -L "https://github.com/hyperledger/fabric-ca/releases/download/v${CA_IMAGETAG}/hyperledger-fabric-ca-${OS_ARCH}-${CA_IMAGETAG}.tar.gz" | tar xz
-    if [ -n "$rc" ]; then
-        echo "==> There was an error downloading the binary file."
-        echo "fabric-ca-client binary is not available to download"
-    else
-        echo "==> Done."
-      cd test-network
-    fi
-    fi
-
-    echo
-    echo "##########################################################"
-    echo "##### Generate certificates using Fabric CA's ############"
-    echo "##########################################################"
-
-    IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA up -d 2>&1
-
-    . organizations/fabric-ca/registerEnroll.sh
-
-    sleep 10
-
-    echo "##########################################################"
-    echo "############ Create Org1 Identities ######################"
-    echo "##########################################################"
-
-    createOrg1
-
-    echo "##########################################################"
-    echo "############ Create Org2 Identities ######################"
-    echo "##########################################################"
-
-    createOrg2
-
-    echo "##########################################################"
-    echo "############ Create Orderer Org Identities ###############"
-    echo "##########################################################"
-
-    createOrderer
-
-  fi
-
   echo
   echo "Generate CCP files for Org1 and Org2"
   ./organizations/ccp-generate.sh
@@ -400,9 +352,6 @@ if [ "${MODE}" != "invoke" ]; then
     -c )
       CHANNEL_NAME="$2"
       shift
-      ;;
-    -ca )
-      CRYPTO="Certificate Authorities"
       ;;
     -r )
       MAX_RETRY="$2"
