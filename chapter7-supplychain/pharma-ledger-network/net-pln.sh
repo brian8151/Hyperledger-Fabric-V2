@@ -178,7 +178,7 @@ function createOrgs() {
   fi
 
   echo
-  echo "Generate CCP files for Org1 and Org2"
+  echo "Generate CCP files for Org1, Org2 and Org3"
   ./organizations/ccp-generate.sh
 }
 
