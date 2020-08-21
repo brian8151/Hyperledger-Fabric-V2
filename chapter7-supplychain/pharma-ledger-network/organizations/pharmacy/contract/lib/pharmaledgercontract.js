@@ -56,8 +56,8 @@ class PharmaLedgerContract extends Contract {
             manufacturer,
             equipmentName,
             ownerName,
-            previousOwnerType: 'MANUAFACTURER',
-            currentOwnerType: 'MANUAFACTURER',
+            previousOwnerType: 'MANUFACTURER',
+            currentOwnerType: 'MANUFACTURER',
             createDateTime: dt,
             lastUpdated: dt
         };
@@ -82,8 +82,8 @@ class PharmaLedgerContract extends Contract {
         let record;
         try {
             record = JSON.parse(strValue);
-            if(record.currentOwnerType!=='MANUAFACTURER') {
-               throw new Error(` equipment - ${equipmentNumber} owner must be MANUAFACTURER`);
+            if(record.currentOwnerType!=='MANUFACTURER') {
+               throw new Error(` equipment - ${equipmentNumber} owner must be MANUFACTURER`);
             }
             record.previousOwnerType= record.currentOwnerType;
             record.currentOwnerType = 'WHOLESALER';
